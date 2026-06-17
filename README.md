@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Akshay's Portfolio
 ==================
 
@@ -50,3 +51,7 @@ Notes
 
 
 
+=======
+# portfolio-website
+Responsive portfolio website showcasing my projects and skills
+>>>>>>> a93488a49338c59c0a0f4f1146d7d5cc3f90002c

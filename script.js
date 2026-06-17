@@ -47,7 +47,7 @@ window.addEventListener('scroll', () => {
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop - 100;
@@ -65,60 +65,17 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Contact form handling
+// Contact form handling for Formspree
 const contactForm = document.querySelector('.contact-form');
+
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const subject = formData.get('subject');
-        const message = formData.get('message');
-        
-        // Simple validation
-        if (!name || !email || !subject || !message) {
-            alert('Please fill in all fields.');
-            return;
-        }
-        
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
-            return;
-        }
-        
-        // Submit to backend
+    contactForm.addEventListener('submit', function () {
         const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
+
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
-
-        fetch('/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, subject, message })
-        })
-        .then(async (res) => {
-            const data = await res.json().catch(() => ({}));
-            if (!res.ok || data.ok === false) throw new Error(data.error || 'Failed to send');
-            alert('Thank you! Your message has been sent.');
-            contactForm.reset();
-        })
-        .catch((err) => {
-            console.error(err);
-            alert('Sorry, something went wrong. Please try again later.');
-        })
-        .finally(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        });
     });
 }
-
 // Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
@@ -137,7 +94,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('.project-card, .skill-category, .stat');
-    
+
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -150,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.innerHTML = '';
-    
+
     function type() {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
@@ -158,7 +115,7 @@ function typeWriter(element, text, speed = 100) {
             setTimeout(type, speed);
         }
     }
-    
+
     type();
 }
 
@@ -186,7 +143,7 @@ window.addEventListener('scroll', () => {
 // Skill bars animation
 function animateSkillBars() {
     const skillItems = document.querySelectorAll('.skill-item');
-    
+
     skillItems.forEach((item, index) => {
         setTimeout(() => {
             item.style.opacity = '1';
@@ -206,7 +163,7 @@ if (skillsSection) {
             }
         });
     }, { threshold: 0.3 });
-    
+
     skillsObserver.observe(skillsSection);
 }
 
@@ -221,7 +178,7 @@ function updateScrollIndicator() {
     const scrollTop = window.pageYOffset;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = (scrollTop / docHeight) * 100;
-    
+
     if (scrollIndicator) {
         scrollIndicator.style.setProperty('--scroll-width', scrollPercent + '%');
     }
@@ -232,12 +189,12 @@ window.addEventListener('scroll', updateScrollIndicator);
 // Smooth reveal animation for sections
 function revealOnScroll() {
     const reveals = document.querySelectorAll('.section-title, .about-text, .contact-info');
-    
+
     reveals.forEach(reveal => {
         const windowHeight = window.innerHeight;
         const elementTop = reveal.getBoundingClientRect().top;
         const elementVisible = 150;
-        
+
         if (elementTop < windowHeight - elementVisible) {
             reveal.classList.add('active');
         }
@@ -254,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reveal.style.transform = 'translateY(30px)';
         reveal.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     });
-    
+
     revealOnScroll();
 });
 
