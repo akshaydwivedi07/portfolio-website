@@ -64,6 +64,7 @@ async function openDoor(button, scrollToDoor = false) {
     doorRoom.hidden = false;
     doorRoom.setAttribute('aria-hidden', 'false');
     doorRoom.scrollTop = 0;
+    roomBack.hidden = false;
     document.body.classList.add('is-door-room-open');
     window.requestAnimationFrame(() => {
         doorRoom.classList.add('is-open');
@@ -78,6 +79,7 @@ function closeDoorRoom() {
     if (doorRoom.hidden) return;
     doorRoom.classList.remove('is-open');
     doorRoom.setAttribute('aria-hidden', 'true');
+    roomBack.hidden = true;
     document.body.classList.remove('is-door-room-open');
     window.setTimeout(() => {
         doorRoom.hidden = true;
