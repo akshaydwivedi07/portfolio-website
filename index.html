@@ -8,170 +8,189 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator" id="scroll-indicator"></div>
-    
-    <!-- Navigation -->
-    <nav class="navbar">
+    <div class="scroll-indicator" id="scroll-indicator" aria-hidden="true"></div>
+    <button class="hanging-light" id="pull-cord" type="button" aria-label="Pull the cord to switch to dark mode" aria-pressed="false">
+        <span class="cord-wire" aria-hidden="true"></span>
+        <i class="cord-pull" aria-hidden="true"></i>
+    </button>
+
+    <header class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="#home">Akshay's Portfolio</a>
+                <a href="#home" aria-label="Akshay Dwivedi, home"><span class="brand-mark">AD</span></a>
             </div>
             <div class="nav-menu" id="nav-menu">
                 <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#door-web" class="nav-link">Web development</a>
+                <a href="#door-app" class="nav-link">App development</a>
+                <a href="#door-ai" class="nav-link">AI projects</a>
+                <a href="#door-design" class="nav-link">UI/UX Design</a>
+                <a href="#about" class="nav-link">My story</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="nav-tools">
+                <div class="local-time"><span>India</span><time id="local-time">--:--</time><span class="time-separator">·</span><time id="local-date">--</time></div>
+                <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Hi, I'm <span class="highlight">Akshay</span></h1>
-                <p class="hero-subtitle">Full Stack Developer | React.js | Node.js | MongoDB | PostgreSQL | Python | Java | AI Integration</p>
-                <p class="hero-description">
-                    I create beautiful, functional websites and applications that solve real-world problems.
-                </p>
+                <p class="eyebrow"><span class="status-dot"></span> Computer science student</p>
+                <h1 class="hero-title">Hi, I'm Akshay.<br><span class="hero-title-muted">I am a</span></h1>
+                <div class="role-stack" aria-label="What I do">
+                    <span class="role-coils" aria-hidden="true"></span>
+                    <span class="role-card active" aria-hidden="false">Web Developer <small>01 / 04</small></span>
+                    <span class="role-card" aria-hidden="true">App Developer <small>02 / 04</small></span>
+                    <span class="role-card" aria-hidden="true">AI Builder <small>03 / 04</small></span>
+                    <span class="role-card" aria-hidden="true">Problem Solver <small>04 / 04</small></span>
+                </div>
+                <p class="hero-description">I bring ideas to life with thoughtful interfaces, dependable code, and a curiosity for what technology can do.</p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    <a href="#contact" class="btn btn-primary">Start a conversation <span aria-hidden="true">→</span></a>
+                    <a href="#door-web" class="btn btn-secondary">See my work</a>
                 </div>
             </div>
             <div class="hero-image">
                 <div class="profile-card">
-                    <div class="profile-image">
-                        <img src="profile_photo.jpg" alt="Akshay Dwivedi" class="profile-photo">
-                    </div>
+                    <img src="profile_cutout_updated.png" alt="Akshay Dwivedi" class="profile-photo">
                 </div>
             </div>
         </div>
+        <div class="hero-footer container">
+            <span><i class="status-dot"></i> Open to internships & roles</span>
+            <span>Based in India · Open to remote</span>
+            <a href="#skills">Scroll to explore <span aria-hidden="true">↓</span></a>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <p class="section-kicker">A little bit of everything</p>
+            <h2 class="section-title">Good things happen<br>when ideas meet code.</h2>
+            <div class="door-layout">
+                <div class="door-grid" role="group" aria-label="Explore my skills">
+                    <button id="door-web" class="skill-door active" type="button" aria-pressed="true" aria-controls="door-room" data-door="web">
+                        <span class="door-frame"><span class="door-panel"><span class="door-plaque">Web<br>developer</span><span class="door-handle"></span></span></span>
+                        <span class="door-caption">01 <span>Web development</span></span>
+                    </button>
+                    <button id="door-app" class="skill-door" type="button" aria-pressed="false" aria-controls="door-room" data-door="app">
+                        <span class="door-frame"><span class="door-panel"><span class="door-plaque">App<br>developer</span><span class="door-handle"></span></span></span>
+                        <span class="door-caption">02 <span>App development</span></span>
+                    </button>
+                    <button id="door-ai" class="skill-door" type="button" aria-pressed="false" aria-controls="door-room" data-door="ai">
+                        <span class="door-frame"><span class="door-panel"><span class="door-plaque">AI<br>builder</span><span class="door-handle"></span></span></span>
+                        <span class="door-caption">03 <span>AI & data</span></span>
+                    </button>
+                    <button id="door-design" class="skill-door" type="button" aria-pressed="false" aria-controls="door-room" data-door="design">
+                        <span class="door-frame"><span class="door-panel"><span class="door-plaque">UI<br>designer</span><span class="door-handle"></span></span></span>
+                        <span class="door-caption">04 <span>Design & detail</span></span>
+                    </button>
+                </div>
+                <div class="door-story" aria-live="polite">
+                    <p class="section-kicker" id="door-number">01 / 04</p>
+                    <h3 id="door-title">Web development</h3>
+                    <p id="door-description">Responsive, full-stack experiences built from the first component to the final API call.</p>
+                    <ul class="door-points" id="door-points">
+                        <li>Discovery & planning</li>
+                        <li>UX & visual design</li>
+                        <li>Front-end & back-end development</li>
+                        <li>Technical SEO & performance</li>
+                        <li>Analytics, launch & ongoing support</li>
+                    </ul>
+                    <button class="text-link" id="door-enter-button" type="button">Click to enter <span aria-hidden="true">↗</span></button>
+                </div>
+            </div>
+            <div class="toolkit">
+                <p class="section-kicker">My everyday toolkit</p>
+                <div class="toolkit-list">
+                    <span>JavaScript</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Node.js</span><span>Python</span><span>Java</span><span>MongoDB</span><span>PostgreSQL</span><span>MySQL</span><span>Git</span><span>Figma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="door-room" id="door-room" aria-labelledby="room-title" aria-hidden="true" hidden>
+        <div class="door-room-content container">
+            <p class="section-kicker" id="room-kicker">01 / 04 · PROJECT ROOM</p>
+            <h2 class="door-room-title" id="room-title" tabindex="-1">Web Development</h2>
+            <p class="door-room-description" id="room-description">Projects built from the first sketch to the final interaction.</p>
+            <h3 class="door-room-subtitle">All selected projects</h3>
+            <div class="door-room-projects" id="door-room-projects"></div>
+        </div>
+        <button class="door-room-back" id="door-room-back" type="button">
+            <span aria-hidden="true">←</span> Back to the doors
+        </button>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I'm a final-year B.Tech Computer Science student with a strong interest in Full Stack Development and AI-powered applications. I enjoy building scalable web applications using React.js, Next.js, Node.js, and MongoDB while continuously improving my problem-solving and software engineering skills.
-                    </p>
-                    <p>
-                        I have developed projects such as SupportIQ (AI Customer Support Platform), GoSocial (Social Media Web App), and AttendVision (Face Recognition Attendance System). Currently, I am seeking internship and entry-level software development opportunities where I can contribute, learn, and grow as a developer.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>5+</h3>
-                            <p>Projects Completed</p>
-                        </div>
-                        <div class="stat">
-                            <h3>Full Stack Development</h3>
-                            <p>Experience</p>
-                        </div>
-                        <div class="stat">
-                            <h3>Internship & Entry-Level</h3>
-                            <p>Opportunities</p>
-                        </div>
+            <p class="section-kicker">My story</p>
+            <div class="story-layout">
+                <div class="story-intro">
+                    <h2 class="section-title">Let's go<br>back in time.</h2>
+                    <div class="story-year-art" aria-hidden="true">
+                        <span id="story-year">2026</span>
+                        <i class="story-clock-hand story-clock-hand-hour"></i>
+                        <i class="story-clock-hand story-clock-hand-minute"></i>
+                        <i></i><i></i><i></i>
                     </div>
+                    <div class="story-era" aria-live="polite">
+                        <p class="timeline-date" id="story-current-date">NOV 2026 — PRESENT</p>
+                        <div class="story-progress">
+                            <span id="story-current-index">01 / 03</span>
+                            <span class="story-progress-track"><span id="story-progress-fill"></span></span>
+                        </div>
+                        <p class="story-scroll-hint"><span aria-hidden="true">↓</span> Scroll to travel through time</p>
+                    </div>
+                </div>
+                <div class="story-timeline" aria-label="Experience and education">
+                    <article class="timeline-entry active" aria-current="true">
+                        <p class="timeline-date">NOV 2026 — PRESENT</p>
+                        <h3>Full-Stack Developer &amp; AI Enthusiast</h3>
+                        <p class="timeline-place">Independent Projects &amp; Development</p>
+                        <ul>
+                            <li>Building full-stack web applications using React, Next.js, Node.js and TypeScript.</li>
+                            <li>Exploring AI integration, RAG pipelines, vector databases and LLM-powered applications.</li>
+                            <li>Developing scalable backend architectures and working with modern database technologies.</li>
+                        </ul>
+                    </article>
+                    <article class="timeline-entry">
+                        <p class="timeline-date">2025 — 2026</p>
+                        <h3>AI &amp; Full-Stack Project Development</h3>
+                        <p class="timeline-place">Personal Projects</p>
+                        <ul>
+                            <li>Built Assistora, an AI-powered customer support platform using Next.js, TypeScript, MongoDB Atlas Vector Search, Jina AI and Ollama.</li>
+                            <li>Developed CampusAI, an AI-powered college inquiry management system using RAG architecture.</li>
+                            <li>Built GoSocial, a social media application featuring authentication, posts, real-time chat and notifications.</li>
+                            <li>Worked with REST APIs, JWT authentication, PostgreSQL, MongoDB and Docker.</li>
+                        </ul>
+                    </article>
+                    <article class="timeline-entry">
+                        <p class="timeline-date">JUL 2023 — JUN 2027</p>
+                        <h3>B.Tech — Computer Science &amp; Engineering</h3>
+                        <p class="timeline-place">IEC College of Engineering and Technology, AKTU</p>
+                        <ul>
+                            <li>Studying computer science, software engineering, database management and core programming concepts.</li>
+                            <li>Developing strong foundations in Java, Data Structures &amp; Algorithms, web development and problem-solving.</li>
+                            <li>Applying academic knowledge through practical projects and hands-on development.</li>
+                        </ul>
+                    </article>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Frontend Technologies</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">
-                            <i class="fab fa-html5"></i>
-                            HTML
-                        </span>
-                        <span class="skill-item">
-                            <i class="fab fa-css3-alt"></i>
-                            CSS
-                        </span>
-                        <span class="skill-item">
-                            <i class="fab fa-js-square"></i>
-                            JavaScript
-                        </span>
-                        <span class="skill-item">
-                            <i class="fab fa-react"></i>
-                            ReactJS
-                        </span>
-                        <span class="skill-item">
-                            <i class="fas fa-code"></i>
-                            TypeScript
-                        </span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend & Languages</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">
-                            <i class="fab fa-database"></i>
-                            Pinecone
-                        </span>
-                        <span class="skill-item">
-                            <i class="fab fa-node-js"></i>
-                            Node.js
-                        </span>
-                        <span class="skill-item">
-                            <i class="fab fa-java"></i>
-                            Java
-                        </span>
-                        <span class="skill-item">
-                            <i class="fab fa-python"></i>
-                            Python
-                        </span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools & Databases </h3>
-                    <div class="skill-items">
-                        <span class="skill-item">
-                            <i class="fas fa-database"></i>
-                            MongoDB
-                        </span>
-                        <span class="skill-item">
-                            <i class="fas fa-database"></i>
-                            MySQL
-                        </span>
-                        <span class="skill-item">
-                            <i class="fab fa-database"></i>
-                            PostgreSQL
-                        </span>
-                        <span class="skill-item">
-                            <i class="fab fa-figma"></i>
-                            Figma
-                        </span>
-                        <span class="skill-item">
-                            <i class="fab fa-github"></i>
-                            Git & GitHub
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
+    <template id="project-cards-template">
+        <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image">
                         <i class="fas fa-users"></i>
@@ -180,8 +199,7 @@
                         <h3>GoSocial- Social Media Web App</h3>
                         <p>Developed a full-stack social media application with authentication and real-time messaging features.</p>
                         <div class="project-tech">
-                            <sp>React.js</sp
-                                an>
+                            <span>React.js</span>
                             <span>Node.js</span>
                             <span>MongoDB</span>
                             <span>Socket.io</span>
@@ -207,7 +225,7 @@
                             <span>Tailwind CSS</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <span class="project-link is-unavailable">Live demo coming soon</span>
                             <a href="https://github.com/akshaydwivedi07/SupportIQ" class="project-link"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
@@ -227,23 +245,23 @@
                             <span>MySQL</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                            <span class="project-link is-unavailable">Live demo coming soon</span>
+                            <span class="project-link is-unavailable">GitHub link coming soon</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+    </template>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-kicker">Available for internships and entry-level roles</p>
+            <h2 class="section-title">Got an opportunity?<br><span>Let's build something good.</span></h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Looking for Internship & Full-Time Opportunities</h3>
-                    <p>I'm a final-year Computer Science student passionate about Full Stack Development and AI-powered applications. Feel free to reach out for collaborations, internships, or software development opportunities.</p>
+                    <h3>I'd love to hear what you're working on.</h3>
+                    <p>I'm a Computer Science student exploring full-stack and AI-powered products. Reach out about a role, a collaboration, or an interesting idea.</p>
                     <div class="contact-methods">
                         <div class="contact-method">
                             <i class="fas fa-envelope"></i>
@@ -286,7 +304,12 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p> Thanks For Visiting!</p>
+            <div class="footer-grid">
+                <div><span class="footer-label">BUILD</span><a href="#door-web">Web projects</a><a href="#skills">What I do</a></div>
+                <div><span class="footer-label">EXPLORE</span><a href="#home">Home</a><a href="#about">My story</a><a href="#contact">Contact</a></div>
+                <div><span class="footer-label">SAY HELLO</span><a href="mailto:akshaydwivedi707@gmail.com">Email Akshay</a><a href="https://www.linkedin.com/in/akshay-dwivedi-35227b204/">LinkedIn</a></div>
+            </div>
+            <div class="footer-bottom"><span>© <span id="current-year"></span> Akshay Dwivedi. Made with curiosity.</span><a href="#home">Back to top ↑</a></div>
         </div>
     </footer>
 
