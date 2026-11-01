@@ -280,18 +280,55 @@ document.addEventListener('keydown', event => {
 });
 
 const roleCards = document.querySelectorAll('.role-card');
+const roleStack = document.querySelector('.role-stack');
+const roleNextButton = document.getElementById('role-next');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let activeRole = 0;
 
-if (roleCards.length > 1 && !reduceMotion.matches) {
-    window.setInterval(() => {
-        roleCards[activeRole].classList.remove('active');
-        roleCards[activeRole].setAttribute('aria-hidden', 'true');
-        activeRole = (activeRole + 1) % roleCards.length;
-        roleCards[activeRole].classList.add('active');
-        roleCards[activeRole].setAttribute('aria-hidden', 'false');
-    }, 3200);
+function showNextRole() {
+    if (roleCards.length < 2) return;
+
+    roleCards[activeRole].classList.remove('active');
+    roleCards[activeRole].setAttribute('aria-hidden', 'true');
+    activeRole = (activeRole + 1) % roleCards.length;
+    roleCards[activeRole].classList.add('active');
+    roleCards[activeRole].setAttribute('aria-hidden', 'false');
+    const nextRole = roleCards[(activeRole + 1) % roleCards.length].firstChild.textContent.trim();
+    roleNextButton.setAttribute('aria-label', `Show ${nextRole}`);
 }
+
+roleNextButton.addEventListener('click', showNextRole);
+
+function moveRoleWithPointer(event) {
+    const bounds = roleStack.getBoundingClientRect();
+    const horizontal = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const vertical = (event.clientY - bounds.top) / bounds.height - 0.5;
+    roleStack.style.setProperty('--role-tilt-x', `${(vertical * -7).toFixed(2)}deg`);
+    roleStack.style.setProperty('--role-tilt-y', `${(horizontal * 9).toFixed(2)}deg`);
+}
+
+let roleTouchActive = false;
+roleStack.addEventListener('pointerdown', event => {
+    if (event.pointerType === 'touch') roleTouchActive = true;
+    moveRoleWithPointer(event);
+});
+roleStack.addEventListener('pointermove', event => {
+    if (event.pointerType !== 'touch' || roleTouchActive) moveRoleWithPointer(event);
+});
+roleStack.addEventListener('pointerup', () => {
+    roleTouchActive = false;
+});
+roleStack.addEventListener('pointercancel', () => {
+    roleTouchActive = false;
+    roleStack.style.setProperty('--role-tilt-x', '0deg');
+    roleStack.style.setProperty('--role-tilt-y', '0deg');
+});
+
+roleStack.addEventListener('pointerleave', () => {
+    roleTouchActive = false;
+    roleStack.style.setProperty('--role-tilt-x', '0deg');
+    roleStack.style.setProperty('--role-tilt-y', '0deg');
+});
 
 function toggleTheme() {
     const isDark = document.body.classList.toggle('theme-dark');

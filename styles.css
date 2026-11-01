@@ -1107,8 +1107,10 @@ section:not(.hero) {
 .role-stack {
     position: relative;
     height: clamp(72px, 7vw, 98px);
-    margin: 20px 0 30px;
+    margin: 20px 0 0;
     perspective: 700px;
+    transform-style: preserve-3d;
+    touch-action: pan-y;
 }
 
 .role-stack::before,
@@ -1158,7 +1160,51 @@ section:not(.hero) {
 
 .role-card.active {
     opacity: 1;
-    transform: translateY(0) rotateX(0);
+    transform: translateY(0) rotateX(var(--role-tilt-x, 0deg)) rotateY(var(--role-tilt-y, 0deg));
+}
+
+.role-stack:not(:hover) .role-card.active {
+    transition: opacity 350ms ease, transform 500ms cubic-bezier(.2, .75, .25, 1);
+}
+
+.role-next {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0 28px auto;
+    padding: 8px 12px 8px 15px;
+    border: 1px solid rgba(32, 29, 26, .15);
+    border-radius: 999px;
+    background: rgba(248, 246, 242, .56);
+    color: #625e59;
+    cursor: pointer;
+    font: inherit;
+    font-size: 11px;
+    letter-spacing: .04em;
+    transition: color 220ms ease, background 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+
+.role-next:hover {
+    transform: translateY(-2px);
+    border-color: rgba(189, 91, 61, .38);
+    background: rgba(189, 91, 61, .08);
+    color: var(--ink);
+}
+
+.role-next-icon {
+    display: grid;
+    width: 23px;
+    height: 23px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    transition: transform 250ms ease, background 250ms ease;
+}
+
+.role-next:hover .role-next-icon {
+    transform: rotate(-45deg);
+    background: var(--accent);
 }
 
 .role-card small {
@@ -2521,8 +2567,19 @@ body.theme-dark .nav-link {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .role-card.active {
+    .role-card,
+    .role-next,
+    .role-next-icon,
+    .door-room-projects .project-card,
+    .door-room-projects .project-image > i {
+        transition: none;
         animation: none;
+    }
+
+    .role-stack .role-card.active,
+    .door-room-projects .project-card:hover {
+        transform: none;
+        translate: none;
     }
 
     .hero,
@@ -2651,6 +2708,9 @@ body.is-door-room-open {
 }
 
 .door-room-projects .project-card {
+    position: sticky;
+    top: 92px;
+    z-index: 1;
     display: grid;
     min-height: 390px;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -2661,14 +2721,25 @@ body.is-door-room-open {
     opacity: 0;
     transform: translateY(24px);
     animation: room-card-enter 600ms both;
+    transition: translate 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
 }
 
 .door-room-projects .project-card:nth-child(2) {
+    top: 108px;
+    z-index: 2;
     animation-delay: 90ms;
 }
 
 .door-room-projects .project-card:nth-child(3) {
+    top: 124px;
+    z-index: 3;
     animation-delay: 180ms;
+}
+
+.door-room-projects .project-card:hover {
+    translate: 0 -5px;
+    border-color: rgba(32, 29, 26, .28);
+    box-shadow: 0 28px 72px rgba(37, 31, 24, .15);
 }
 
 .door-room-projects .project-card:nth-child(even) .project-image {
@@ -2681,6 +2752,30 @@ body.is-door-room-open {
     border: 0;
     border-radius: 23px;
     font-size: clamp(70px, 10vw, 130px);
+    transition: background-size 400ms ease, color 300ms ease;
+}
+
+.door-room-projects .project-card:hover .project-image > i {
+    animation: project-icon-float 650ms cubic-bezier(.2, .75, .25, 1) both;
+}
+
+.door-room-projects .project-content .project-meta {
+    display: flex;
+    min-height: 0;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 18px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: .12em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.door-room-projects .project-content .project-meta span:last-child {
+    color: var(--accent);
+    white-space: nowrap;
 }
 
 .door-room-projects .project-content {
@@ -2698,6 +2793,10 @@ body.is-door-room-open {
 .door-room-projects .project-content p {
     min-height: 0;
     font-size: clamp(14px, 1.4vw, 17px);
+}
+
+.door-room-projects .project-content p:not(.project-meta) {
+    margin-bottom: 20px;
 }
 
 .door-room-projects .project-tech span {
@@ -2771,6 +2870,12 @@ body.theme-dark .door-room-projects .project-image {
     }
 }
 
+@keyframes project-icon-float {
+    50% {
+        transform: translateY(-8px) scale(1.06);
+    }
+}
+
 @media (max-width: 700px) {
     .door-room {
         padding: 100px 0 96px;
@@ -2789,9 +2894,15 @@ body.theme-dark .door-room-projects .project-image {
     }
 
     .door-room-projects .project-card {
+        position: relative;
+        top: auto;
         min-height: 0;
         grid-template-columns: 1fr;
         border-radius: 18px;
+    }
+
+    .door-room-projects .project-card:nth-child(n) {
+        top: auto;
     }
 
     .door-room-projects .project-image,
@@ -2825,6 +2936,16 @@ body.theme-dark .door-room-projects .project-image {
         animation: none;
         opacity: 1;
         transform: none;
+        translate: none;
+        transition: none;
+    }
+
+    .door-room-projects .project-card:hover {
+        box-shadow: 0 20px 60px rgba(37, 31, 24, .08);
+    }
+
+    .door-room-projects .project-image > i {
+        animation: none;
     }
 }
 
