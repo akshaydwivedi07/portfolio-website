@@ -417,12 +417,41 @@ pullCord.addEventListener('click', () => {
 
 document.getElementById('current-year').textContent = String(new Date().getFullYear());
 
-const contactForm = document.querySelector('.contact-form');
-
-if (contactForm) {
+document.querySelectorAll('.contact-form').forEach(contactForm => {
     contactForm.addEventListener('submit', () => {
         const submitButton = contactForm.querySelector('button[type="submit"]');
         submitButton.textContent = 'Sending...';
         submitButton.disabled = true;
     });
+});
+
+const contactModal = document.getElementById('contact-modal');
+const hireButton = document.querySelector('.hero-buttons .btn-primary');
+const contactModalCloseButton = contactModal?.querySelector('.contact-modal-close');
+let lastFocusedElement = null;
+
+function openContactModal(event) {
+    event.preventDefault();
+    lastFocusedElement = document.activeElement;
+    contactModal.hidden = false;
+    contactModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    window.requestAnimationFrame(() => contactModalCloseButton?.focus());
 }
+
+function closeContactModal() {
+    if (!contactModal || contactModal.hidden) return;
+    contactModal.hidden = true;
+    contactModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    lastFocusedElement?.focus();
+}
+
+hireButton?.addEventListener('click', openContactModal);
+contactModal?.querySelectorAll('[data-close-contact-modal]').forEach(element => {
+    element.addEventListener('click', closeContactModal);
+});
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeContactModal();
+});
