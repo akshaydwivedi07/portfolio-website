@@ -2532,6 +2532,71 @@ body.theme-dark .nav-link {
     filter: grayscale(0) contrast(1);
 }
 
+.resume-card {
+    position: absolute;
+    right: clamp(8px, 2vw, 30px);
+    bottom: clamp(46px, 8vh, 88px);
+    z-index: 2;
+    width: min(240px, 48%);
+    padding: 17px 18px 16px;
+    border: 1px solid rgba(242, 239, 235, .36);
+    border-radius: 15px;
+    background: rgba(24, 21, 20, .82);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, .2);
+    color: #f2efeb;
+    backdrop-filter: blur(10px);
+    animation: reveal-up 800ms 250ms both;
+}
+
+.resume-card-label {
+    margin: 0 0 7px;
+    color: #b9ada3;
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.resume-card h2 {
+    margin: 0;
+    font-family: var(--display-font);
+    font-size: clamp(21px, 2.4vw, 30px);
+    font-weight: 500;
+    letter-spacing: -.04em;
+}
+
+.resume-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.resume-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border: 1px solid rgba(242, 239, 235, .5);
+    border-radius: 999px;
+    color: #f2efeb;
+    font-size: 10px;
+    letter-spacing: .04em;
+    text-decoration: none;
+    transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.resume-link:hover,
+.resume-link:focus-visible {
+    border-color: #f2efeb;
+    background: #f2efeb;
+    color: #211d1c;
+}
+
+.resume-link-secondary {
+    border-color: rgba(242, 239, 235, .2);
+    color: #cfc4bb;
+}
+
 @media (max-width: 620px) {
     .hanging-light {
         right: -10px;
@@ -2558,6 +2623,13 @@ body.theme-dark .nav-link {
     .profile-card {
         height: auto;
         width: min(82%, 310px);
+    }
+
+    .resume-card {
+        right: -8px;
+        bottom: 34px;
+        width: min(220px, 64%);
+        padding: 14px;
     }
 
     .profile-photo {
